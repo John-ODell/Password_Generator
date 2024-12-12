@@ -30,7 +30,7 @@ symbols = {
 def gen_password_letters_numbers(length):
     letters = string.ascii_letters
     numbers = string.digits
-    all_characters = list(letters + numbers)  # Convert to list
+    all_characters = list(letters + numbers) 
     random.shuffle(all_characters)
     password = ''.join(random.choice(all_characters) for i in range(length))
     return password
@@ -39,17 +39,15 @@ def gen_password_letters_numbers(length):
 def gen_password_symbols(length):
     letters = string.ascii_letters
     numbers = string.digits
-    all_characters = list(letters + numbers + ''.join(symbols.values()))  # Convert to list
+    all_characters = list(letters + numbers + ''.join(symbols.values())) 
     random.shuffle(all_characters)
     password = ''.join(random.choice(all_characters) for i in range(length))
     return password
 
 
-# Initialize an empty DataFrame
 password_list = pd.DataFrame(columns=['Name', 'Password'])
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -68,10 +66,8 @@ def index():
         new_row = pd.DataFrame({'Name': [name], 'Password': [password]})
         password_list = pd.concat([password_list, new_row], ignore_index=True)
 
-        # Debugging: Print the DataFrame to the console
         print(password_list)
 
-        # Save the DataFrame to a CSV file
         password_list.to_csv('passwords.csv', index=False)
 
         return f"Password for {name}: {password} (Saved to CSV)"
